@@ -8,8 +8,7 @@ public class CamRaycaster : MonoBehaviour
 
     private Camera cam;
     private InputController inputs;
-
-    private Vector3 moveTarget;
+    [SerializeField] private PlayerMotor player;
 
     private void Start()
     {
@@ -24,12 +23,7 @@ public class CamRaycaster : MonoBehaviour
 
         if (Physics.Raycast(_ray.origin, _ray.direction, out _hit, Mathf.Infinity, groundLayer))
         {
-            moveTarget = _hit.point;
+            player.MoveTo(_hit.point);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(moveTarget, 0.5f);
     }
 }
