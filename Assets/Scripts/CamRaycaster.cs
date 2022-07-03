@@ -3,12 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CamRaycaster : MonoBehaviour
 {
-    private Vector3 moveTarget;
-
     [SerializeField] private LayerMask groundLayer;
 
     private Camera cam;
     private InputsManager inputs;
+    [SerializeField] private CharacterMotor player;
 
     private void Start()
     {
@@ -23,12 +22,7 @@ public class CamRaycaster : MonoBehaviour
 
         if (Physics.Raycast(_ray.origin, _ray.direction, out _hit, float.MaxValue, groundLayer))
         {
-            moveTarget = _hit.point;
+            player.MoveTo(_hit.point);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(moveTarget, 0.5f);
     }
 }
